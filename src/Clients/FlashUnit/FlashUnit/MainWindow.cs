@@ -85,16 +85,16 @@ namespace FlashUnit
             scroll.Show ();
             primary_vbox.Add (scroll);
 
-            //var photos = new Hyena.Data.MemoryListModel<Photo> ();
+            var photos = new Hyena.Data.MemoryListModel<Photo> ();
 
-            var photos = new DatabaseListModel<DatabasePhoto, Photo> ("Photo", "photo", Core.DatabaseConnection, Core.PhotoProvider, "uudsfgew");
+            //var photos = new DatabaseListModel<DatabasePhoto, Photo> ("Photo", "photo", Core.DatabaseConnection, Core.PhotoProvider, "uudsfgew");
 
-            photos.Reload ();
+            //photos.Reload ();
 
-            Hyena.Log.DebugFormat ("Number of Photos: {0}", photos.Count);
+            //Hyena.Log.DebugFormat ("Number of Photos: {0}", photos.Count);
 
-            //foreach (Photo photo in Tripod.Base.Core.PhotoProvider.FetchAll ())
-            //    photos.Add (photo);
+            foreach (Photo photo in Tripod.Base.Core.PhotoProvider.FetchAll ())
+                photos.Add (photo);
 
             photo_view.SetModel (photos);
             

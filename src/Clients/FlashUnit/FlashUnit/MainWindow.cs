@@ -30,6 +30,10 @@ using Hyena;
 using Hyena.Jobs;
 using Tripod.Base;
 using Tripod.Jobs;
+using Tripod.Collection;
+using Tripod.Collection.Database;
+using Tripod.Gui.Collection;
+
 
 namespace FlashUnit
 {
@@ -69,9 +73,30 @@ namespace FlashUnit
         {
             primary_vbox = new VBox ();
             
-            var label = new Label ("Super duper test UI!");
+            /*var label = new Label ("Super duper test UI!");
             label.Show ();
-            primary_vbox.Add (label);
+            primary_vbox.Add (label);*/
+
+            var photo_view = new PhotoListView ();
+            photo_view.Show ();
+
+            var scroll = new ScrolledWindow ();
+            scroll.Add (photo_view);
+            scroll.Show ();
+            primary_vbox.Add (scroll);
+
+            //var photos = new Hyena.Data.MemoryListModel<Photo> ();
+
+            var photos = new DatabaseListModel<DatabasePhoto, Photo> ("Photo", "photo", Core.DatabaseConnection, Core.PhotoProvider, "uudsfgew");
+
+            photos.Reload ();
+
+            Hyena.Log.DebugFormat ("Number of Photos: {0}", photos.Count);
+
+            //foreach (Photo photo in Tripod.Base.Core.PhotoProvider.FetchAll ())
+            //    photos.Add (photo);
+
+            photo_view.SetModel (photos);
             
             var button_box = new HButtonBox ();
             button_box.Show ();

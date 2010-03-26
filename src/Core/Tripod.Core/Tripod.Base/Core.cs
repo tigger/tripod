@@ -27,6 +27,10 @@
 using Gtk;
 using System;
 using Hyena.Jobs;
+using Hyena.Data.Sqlite;
+
+using Tripod.Collection.Database;
+
 
 namespace Tripod.Base
 {
@@ -45,6 +49,41 @@ namespace Tripod.Base
             Hyena.Log.Debug ("Initializing Core");
             
             Application.Init (name, ref args);
+
+            InitializeDatabase ();
+        }
+
+        public static SqliteModelProvider<DatabasePhoto> PhotoProvider { get; private set; }
+        public static HyenaSqliteConnection DatabaseConnection { get; private set; }
+
+        private static void InitializeDatabase ()
+        {
+            DatabaseConnection = new HyenaSqliteConnection("test.db");
+            PhotoProvider = new SqliteModelProvider<DatabasePhoto>(DatabaseConnection, "Photos");
+
+            if (PhotoProvider.FetchAll ().GetEnumerator ().Current == null)
+                InitializePhotos ();
+        }
+
+        private static void InitializePhotos ()
+        {
+            string [] paths = {
+                "/photo1.jpg",
+                "/photo2.jpg",
+                "/photo3.jpg",
+                "/photo4.jpg",
+                "/photo5.jpg",
+                "/photo6.jpg",
+                "/photo7.jpg",
+                "/photo8.jpg",
+                "/photo9.jpg",
+                "/photo10.jpg"
+            };
+
+            foreach (string path in paths) {
+                var photo = new DatabasePhoto (new SafeUri (path));
+                PhotoProvider.Save (photo);
+            }
         }
     }
 }

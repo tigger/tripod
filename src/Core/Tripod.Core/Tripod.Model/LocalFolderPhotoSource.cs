@@ -34,7 +34,7 @@ using Hyena.Jobs;
 
 namespace Tripod.Model
 {
-    public class LocalFolderPhotoSource : ICacheablePhotoSource, IAcceptImportPhotoSource
+    public class LocalFolderPhotoSource : ICacheablePhotoSource
     {
         static SqliteModelProvider<LocalFolderPhotoSourceParameters> parameter_provider = new SqliteModelProvider<LocalFolderPhotoSourceParameters> (Core.DbConnection, "LocalFolderSourceParameters");
         static SqliteModelProvider<LocalFolderPhotoSourceUris> uri_provider = new SqliteModelProvider<LocalFolderPhotoSourceUris> (Core.DbConnection, "LocalFolderSourceUris");

@@ -16,7 +16,6 @@ SOURCES =  \
 	Tripod.Jobs/ThreadPoolJob.cs \
 	Tripod.Model/CachePhoto.cs \
 	Tripod.Model/CachePhotoSource.cs \
-	Tripod.Model/IAcceptImportPhotoSource.cs \
 	Tripod.Model/ICacheablePhotoSource.cs \
 	Tripod.Model/ICachingPhotoSource.cs \
 	Tripod.Model/INamingPolicy.cs \
